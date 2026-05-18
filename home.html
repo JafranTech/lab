@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Dashboard</title>
+    <title>Application Form</title>
 
     <style>
 
@@ -38,66 +38,50 @@
         ul li a{
             color: white;
             text-decoration: none;
-            font-size: 18px;
         }
 
         ul li a:hover{
             color: red;
         }
 
-        /* HERO SECTION */
+        /* FORM CONTAINER */
 
-        .hero{
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .hero h1{
-            font-size: 40px;
-        }
-
-        .hero button{
-            padding: 12px 25px;
-            border: none;
-            border-radius: 20px;
-            background-color: red;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        /* LOGIN FORM */
-
-        .login-container{
+        .apply{
             display: flex;
             justify-content: center;
-            margin-top: 50px;
+            margin-top: 60px;
         }
 
-        .login-box{
-            width: 320px;
+        /* FORM BOX */
+
+        .form-box{
             background-color: white;
+            width: 350px;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0px 0px 10px gray;
-            text-align: center;
         }
 
-        .login-box h2{
+        .form-box h2{
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .login-box input{
+        .form-box label{
+            font-weight: bold;
+        }
+
+        .form-box input{
             width: 100%;
-            padding: 12px;
-            margin-top: 10px;
+            padding: 10px;
+            margin-top: 8px;
             margin-bottom: 20px;
             border-radius: 10px;
             border: 1px solid gray;
             box-sizing: border-box;
         }
 
-        .login-box button{
+        .form-box button{
             width: 100%;
             padding: 12px;
             border: none;
@@ -108,12 +92,14 @@
             cursor: pointer;
         }
 
-        .login-box button:hover{
+        .form-box button:hover{
             background-color: red;
         }
 
     </style>
+
 </head>
+
 <body>
 
     <!-- NAVBAR -->
@@ -130,58 +116,45 @@
 
     </nav>
 
-    <!-- HERO -->
+    <!-- APPLICATION FORM -->
 
-    <div class="hero">
+    <div class="apply">
 
-        <h1>Welcome to Dashboard</h1>
+        <div class="form-box">
 
-        <button>Get Started</button>
+            <h2>Application Form</h2>
 
-    </div>
+            <form onsubmit="submitForm(event)">
 
-    <!-- LOGIN FORM -->
+                <label>Name</label>
+                <input type="text" required>
 
-    <div class="login-container">
+                <label>Aadhar Number</label>
+                <input type="number" required>
 
-        <div class="login-box">
+                <label>Date of Birth</label>
+                <input type="date" required>
 
-            <h2>Login</h2>
+                <label>State</label>
+                <input type="text" required>
 
-            Email:<input type="email" placeholder="Enter Email" id="mail">
+                <button type="submit">Submit</button>
 
-           Password: <input type="password" placeholder="Enter Password" id="passs">
+                <h3 id="new"></h3>
 
-            <button onclick="sub()">Submit</button>
+            </form>
 
         </div>
 
     </div>
 
-    
-
-    <!-- JAVASCRIPT -->
-
     <script>
 
-        function sub(){
+        function submitForm(event){
 
-            let mail = document.getElementById("mail").value;
-
-            let pass = document.getElementById("passs").value;
-
-            if(mail === "crescent123@gmail.com" && pass === "1234"){
-
-                alert("Login Successful");
-
-                window.location.href = "home.html";
-
-            }
-            else{
-
-                alert("Invalid Email or Password");
-
-            }
+            
+            document.getElementById("new").textContent="success";
+            alert("Form Submitted Successfully");
 
         }
 

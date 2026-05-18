@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family: Arial;
+            background:#f4f4f4;
+        }
+
+        nav{
+            background:black;
+            color:white;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+        }
+
+        ul{
+            display:flex;
+            gap:20px;
+            list-style:none;
+        }
+
+        ul li a{
+            color:white;
+            text-decoration:none;
+        }
+
+        .container{
+            display:flex;
+            justify-content:center;
+            margin-top:80px;
+        }
+
+        .box{
+            width:320px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0px 0px 10px gray;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-top:10px;
+            margin-bottom:20px;
+            border-radius:10px;
+            border:1px solid gray;
+            box-sizing:border-box;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            background:black;
+            color:white;
+            cursor:pointer;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <nav>
+
+        <h2>MJ</h2>
+
+        <ul>
+            <li><a href="index.html">Login</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="box">
+
+            <h2>Login</h2>
+
+            <input type="email" placeholder="Enter Email" id="mail">
+
+            <input type="password" placeholder="Enter Password" id="pass">
+
+            <button onclick="login()">Submit</button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function login(){
+
+            let mail = document.getElementById("mail").value;
+
+            let pass = document.getElementById("pass").value;
+
+            if(mail === "admin@gmail.com" && pass === "1234"){
+
+                alert("Login Success");
+
+                window.location.href = "home.html";
+
+            }
+
+            else{
+
+                alert("Invalid Login");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
