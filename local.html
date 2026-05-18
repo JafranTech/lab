@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Management System</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin:0;
+            padding:0;
+            background:#f4f4f4;
+        }
+
+        nav{
+            background:#333;
+            padding:15px;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-right:20px;
+            font-weight:bold;
+        }
+
+        section{
+            padding:20px;
+            display:none;
+        }
+
+        #home{
+            display:block;
+        }
+
+        form{
+            background:white;
+            padding:20px;
+            width:300px;
+            border-radius:5px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+        }
+
+        button{
+            margin-top:15px;
+            padding:10px;
+            width:100%;
+            background:green;
+            color:white;
+            border:none;
+        }
+
+        table{
+            width:100%;
+            margin-top:20px;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        table,th,td{
+            border:1px solid black;
+        }
+
+        th,td{
+            padding:10px;
+            text-align:center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('register')">Register</a>
+        <a href="#" onclick="showPage('records')">Records</a>
+        <a href="#" onclick="showPage('about')">About</a>
+    </nav>
+
+    <!-- Home -->
+
+    <section id="home">
+        <h1>Welcome to Management System</h1>
+        <p>This is common implementation template.</p>
+    </section>
+
+    <!-- Register -->
+
+    <section id="register">
+
+        <h2>Registration Form</h2>
+
+        <form onsubmit="saveData(event)">
+
+            <input type="text" id="name" placeholder="Enter Name">
+
+            <input type="email" id="email" placeholder="Enter Email">
+
+            <input type="number" id="age" placeholder="Enter Age">
+
+            <button type="submit">Save</button>
+
+        </form>
+
+        <p id="msg"></p>
+
+    </section>
+
+    <!-- Records -->
+
+    <section id="records">
+
+        <h2>Stored Records</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- About -->
+
+    <section id="about">
+        <h2>About</h2>
+        <p>Software Development Lab Project</p>
+    </section>
+
+<script>
+
+    // Navigation
+
+    function showPage(pageId)
+    {
+        let sections = document.querySelectorAll("section");
+
+        sections.forEach(section => {
+            section.style.display = "none";
+        });
+
+        document.getElementById(pageId).style.display = "block";
+
+        if(pageId === "records")
+        {
+            loadData();
+        }
+    }
+
+    // Save Data
+
+    function saveData(event)
+    {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let age = document.getElementById("age").value;
+
+        // Minimum Validation
+
+        if(name === "" || email === "" || age === "")
+        {
+            document.getElementById("msg").innerHTML =
+            "All fields are required";
+
+            return;
+        }
+
+        if(age < 18)
+        {
+            document.getElementById("msg").innerHTML =
+            "Age must be above 18";
+
+            return;
+        }
+
+        // Object Creation
+
+        let user = {
+            name:name,
+            email:email,
+            age:age
+        };
+
+        // Local Storage
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        users.push(user);
+
+        localStorage.setItem("users", JSON.stringify(users));
+
+        document.getElementById("msg").innerHTML =
+        "Data Saved Successfully";
+
+        document.querySelector("form").reset();
+    }
+
+    // Load Data
+
+    function loadData()
+    {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        let tableBody = document.getElementById("tableBody");
+
+        tableBody.innerHTML = "";
+
+        users.forEach(user => {
+
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.age}</td>
+                </tr>
+            `;
+        });
+    }
+
+</script>
+
+</body>
+</html>

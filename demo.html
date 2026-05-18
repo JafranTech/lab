@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Management System</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            margin: 0;
+        }
+
+        nav{
+            background:black;
+            padding:15px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            
+        }
+
+        nav button{
+            padding:10px;
+            margin-right:10px;
+            border-radius: 20px;
+        }
+
+        .page{
+            display:none;
+            padding:20px;
+        }
+
+        #home{
+            display:block;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+
+<nav>
+
+    <button onclick="showPage('home')">Home</button>
+
+    <button onclick="showPage('register')">Register</button>
+
+    <button onclick="showPage('about')">About</button>
+
+    <button onclick="showPage('contact')">Contact</button>
+
+</nav>
+
+<!-- Home -->
+
+<div id="home" class="page">
+
+    <h1>Welcome</h1>
+
+    <p>Management System</p>
+
+</div>
+
+<!-- Register -->
+
+<div id="register" class="page">
+
+    <h2>Registration Form</h2>
+
+    Name:
+    <input type="text" id="name">
+    <br><br>
+
+    Email:
+    <input type="text" id="email">
+    <br><br>
+
+    <button onclick="validateForm()">Submit</button>
+
+    <h3 id="result"></h3>
+
+</div>
+
+<!-- About -->
+
+<div id="about" class="page">
+
+    <h1>About Page</h1>
+
+</div>
+
+<!-- Contact -->
+
+<div id="contact" class="page">
+
+    <h1>Contact Page</h1>
+
+</div>
+
+<script>
+
+    // Navigation Function
+
+    function showPage(pageId)
+    {
+
+        document.getElementById("home").style.display = "none";
+
+        document.getElementById("register").style.display = "none";
+
+        document.getElementById("about").style.display = "none";
+
+        document.getElementById("contact").style.display = "none";
+
+        document.getElementById(pageId).style.display = "block";
+
+    }
+
+    // Validation Function
+
+    function validateForm()
+    {
+
+        var name = document.getElementById("name").value;
+
+        var email = document.getElementById("email").value;
+
+        if(name == "")
+        {
+            alert("ENTER THE NAME")
+            document.getElementById("result").innerHTML =
+            "Enter Name";
+
+        }
+
+        else if(email == "")
+        {
+
+            document.getElementById("result").innerHTML =
+            "Enter Email";
+
+        }
+
+        else
+        {
+
+            document.getElementById("result").innerHTML =
+            "Form Submitted Successfully";
+
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>
