@@ -6,7 +6,7 @@
     <style>
 
         body{
-            font-family: Arial;
+            font-family:Arial;
             margin:0;
             padding:0;
             background:#f4f4f4;
@@ -44,6 +44,7 @@
             width:100%;
             padding:10px;
             margin-top:10px;
+            box-sizing:border-box;
         }
 
         button{
@@ -53,6 +54,7 @@
             background:green;
             color:white;
             border:none;
+            cursor:pointer;
         }
 
         table{
@@ -71,6 +73,16 @@
             text-align:center;
         }
 
+        .message{
+            margin-top:10px;
+            font-weight:bold;
+            color:red;
+        }
+
+        h1,h2{
+            color:#333;
+        }
+
     </style>
 </head>
 
@@ -79,17 +91,71 @@
     <!-- Navigation -->
 
     <nav>
+
         <a href="#" onclick="showPage('home')">Home</a>
+
+        <a href="#" onclick="showPage('signup')">Signup</a>
+
+        <a href="#" onclick="showPage('login')">Login</a>
+
         <a href="#" onclick="showPage('register')">Register</a>
+
         <a href="#" onclick="showPage('records')">Records</a>
+
         <a href="#" onclick="showPage('about')">About</a>
+
     </nav>
 
     <!-- Home -->
 
     <section id="home">
+
         <h1>Welcome to Management System</h1>
+
         <p>This is common implementation template.</p>
+
+    </section>
+
+    <!-- Signup -->
+
+    <section id="signup">
+
+        <h2>Signup Page</h2>
+
+        <form onsubmit="signupUser(event)">
+
+            <input type="text" id="signupName" placeholder="Enter Username">
+
+            <input type="email" id="signupEmail" placeholder="Enter Email">
+
+            <input type="password" id="signupPassword" placeholder="Enter Password">
+
+            <button type="submit">Signup</button>
+
+        </form>
+
+        <p id="signupMsg" class="message"></p>
+
+    </section>
+
+    <!-- Login -->
+
+    <section id="login">
+
+        <h2>Login Page</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <input type="email" id="loginEmail" placeholder="Enter Email">
+
+            <input type="password" id="loginPassword" placeholder="Enter Password">
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p id="loginMsg" class="message"></p>
+
     </section>
 
     <!-- Register -->
@@ -110,7 +176,7 @@
 
         </form>
 
-        <p id="msg"></p>
+        <p id="msg" class="message"></p>
 
     </section>
 
@@ -123,11 +189,15 @@
         <table>
 
             <thead>
+
                 <tr>
+
                     <th>Name</th>
                     <th>Email</th>
                     <th>Age</th>
+
                 </tr>
+
             </thead>
 
             <tbody id="tableBody">
@@ -141,8 +211,11 @@
     <!-- About -->
 
     <section id="about">
+
         <h2>About</h2>
+
         <p>Software Development Lab Project</p>
+
     </section>
 
 <script>
@@ -154,7 +227,9 @@
         let sections = document.querySelectorAll("section");
 
         sections.forEach(section => {
+
             section.style.display = "none";
+
         });
 
         document.getElementById(pageId).style.display = "block";
@@ -165,17 +240,103 @@
         }
     }
 
+    // Signup
+
+    function signupUser(event)
+    {
+        event.preventDefault();
+
+        let name =
+        document.getElementById("signupName").value;
+
+        let email =
+        document.getElementById("signupEmail").value;
+
+        let password =
+        document.getElementById("signupPassword").value;
+
+        if(name === "" || email === "" || password === "")
+        {
+            document.getElementById("signupMsg").innerHTML =
+            "All fields are required";
+
+            return;
+        }
+
+        let users =
+        JSON.parse(localStorage.getItem("loginUsers")) || [];
+
+        let user = {
+
+            name:name,
+            email:email,
+            password:password
+
+        };
+
+        users.push(user);
+
+        localStorage.setItem(
+            "loginUsers",
+            JSON.stringify(users)
+        );
+
+        document.getElementById("signupMsg").innerHTML =
+        "Signup Successful";
+
+        document.querySelector("#signup form").reset();
+    }
+
+    // Login
+
+    function loginUser(event)
+    {
+        event.preventDefault();
+
+        let email =
+        document.getElementById("loginEmail").value;
+
+        let password =
+        document.getElementById("loginPassword").value;
+
+        let users =
+        JSON.parse(localStorage.getItem("loginUsers")) || [];
+
+        let validUser = users.find(user => {
+
+            return user.email === email &&
+                   user.password === password;
+
+        });
+
+        if(validUser)
+        {
+            document.getElementById("loginMsg").innerHTML =
+            "Login Successful";
+        }
+        else
+        {
+            document.getElementById("loginMsg").innerHTML =
+            "Invalid Email or Password";
+        }
+
+        document.querySelector("#login form").reset();
+    }
+
     // Save Data
 
     function saveData(event)
     {
         event.preventDefault();
 
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let age = document.getElementById("age").value;
+        let name =
+        document.getElementById("name").value;
 
-        // Minimum Validation
+        let email =
+        document.getElementById("email").value;
+
+        let age =
+        document.getElementById("age").value;
 
         if(name === "" || email === "" || age === "")
         {
@@ -193,46 +354,56 @@
             return;
         }
 
-        // Object Creation
-
         let user = {
+
             name:name,
             email:email,
             age:age
+
         };
 
-        // Local Storage
-
-        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let users =
+        JSON.parse(localStorage.getItem("users")) || [];
 
         users.push(user);
 
-        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem(
+            "users",
+            JSON.stringify(users)
+        );
 
         document.getElementById("msg").innerHTML =
         "Data Saved Successfully";
 
-        document.querySelector("form").reset();
+        document.querySelector("#register form").reset();
     }
 
     // Load Data
 
     function loadData()
     {
-        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let users =
+        JSON.parse(localStorage.getItem("users")) || [];
 
-        let tableBody = document.getElementById("tableBody");
+        let tableBody =
+        document.getElementById("tableBody");
 
         tableBody.innerHTML = "";
 
         users.forEach(user => {
 
             tableBody.innerHTML += `
+
                 <tr>
+
                     <td>${user.name}</td>
+
                     <td>${user.email}</td>
+
                     <td>${user.age}</td>
+
                 </tr>
+
             `;
         });
     }
