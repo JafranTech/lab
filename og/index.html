@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJ Landing Page</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:#f4f4f4;
+            color:#333;
+        }
+
+        /* NAVBAR */
+
+        nav{
+            width:100%;
+            background:black;
+            padding:20px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo{
+            color:white;
+            font-size:30px;
+            font-weight:bold;
+        }
+
+        ul{
+            display:flex;
+            list-style:none;
+            gap:25px;
+        }
+
+        ul li a{
+            text-decoration:none;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        ul li a:hover{
+            color:red;
+        }
+
+        /* COMMON SECTION */
+
+        section{
+            display:none;
+            min-height:100vh;
+        }
+
+        .active{
+            display:block;
+        }
+
+        /* HERO SECTION */
+
+        .hero{
+            height:100vh;
+            background:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop') center/cover;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            position:relative;
+        }
+
+        .overlay{
+            background:rgba(0,0,0,0.7);
+            width:100%;
+            height:100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            color:white;
+            padding:20px;
+        }
+
+        .overlay h1{
+            font-size:65px;
+            margin-bottom:20px;
+        }
+
+        .overlay p{
+            font-size:22px;
+            width:70%;
+            line-height:35px;
+            margin-bottom:30px;
+        }
+
+        .overlay button{
+            padding:15px 35px;
+            border:none;
+            background:red;
+            color:white;
+            border-radius:30px;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .overlay button:hover{
+            background:white;
+            color:black;
+        }
+
+        /* FEATURES */
+
+        .features{
+            padding:80px 50px;
+            background:white;
+        }
+
+        .features h1{
+            text-align:center;
+            margin-bottom:50px;
+            font-size:45px;
+        }
+
+        .feature-container{
+            display:flex;
+            justify-content:center;
+            gap:30px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            width:300px;
+            background:#f9f9f9;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0px 0px 10px gray;
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+        }
+
+        .card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .card-content{
+            padding:20px;
+            text-align:center;
+        }
+
+        .card-content h2{
+            margin-bottom:15px;
+        }
+
+        .card-content p{
+            line-height:28px;
+        }
+
+        /* LOGIN */
+
+        .login-container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:90vh;
+        }
+
+        .login-box{
+            width:350px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0px 0px 15px gray;
+        }
+
+        .login-box h1{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .login-box input{
+            width:100%;
+            padding:12px;
+            margin-bottom:20px;
+            border-radius:10px;
+            border:1px solid gray;
+        }
+
+        .login-box button{
+            width:100%;
+            padding:12px;
+            border:none;
+            background:black;
+            color:white;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        .login-box button:hover{
+            background:red;
+        }
+
+        /* ABOUT */
+
+        .about{
+            padding:100px 50px;
+            text-align:center;
+            background:white;
+        }
+
+        .about h1{
+            font-size:50px;
+            margin-bottom:30px;
+        }
+
+        .about p{
+            width:70%;
+            margin:auto;
+            font-size:22px;
+            line-height:40px;
+        }
+
+        /* CONTACT */
+
+        .contact-container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:90vh;
+        }
+
+        .contact-box{
+            width:400px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0px 0px 15px gray;
+        }
+
+        .contact-box h1{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .contact-box input,
+        .contact-box textarea{
+            width:100%;
+            padding:12px;
+            margin-bottom:20px;
+            border-radius:10px;
+            border:1px solid gray;
+        }
+
+        .contact-box button{
+            width:100%;
+            padding:12px;
+            border:none;
+            background:black;
+            color:white;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        .contact-box button:hover{
+            background:red;
+        }
+
+        /* FOOTER */
+
+        footer{
+            background:black;
+            color:white;
+            text-align:center;
+            padding:30px;
+        }
+
+        footer h2{
+            margin-bottom:15px;
+        }
+
+        footer p{
+            line-height:30px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            nav{
+                flex-direction:column;
+                gap:20px;
+            }
+
+            ul{
+                flex-direction:column;
+                align-items:center;
+            }
+
+            .overlay h1{
+                font-size:40px;
+            }
+
+            .overlay p{
+                width:100%;
+                font-size:18px;
+            }
+
+            .about p{
+                width:100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">MJ</div>
+
+        <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('login')">Login</a></li>
+            <li><a onclick="showPage('about')">About</a></li>
+            <li><a onclick="showPage('contact')">Contact</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- HOME PAGE -->
+
+    <section id="home" class="active">
+
+        <div class="hero">
+
+            <div class="overlay">
+
+                <h1>Modern Landing Page</h1>
+
+                <p>
+                    Professional responsive website using HTML, CSS and JavaScript.
+                    Includes login system, navigation, landing page, cards,
+                    contact form and footer.
+                </p>
+
+                <button onclick="showPage('login')">Get Started</button>
+
+            </div>
+
+        </div>
+
+        <!-- FEATURES -->
+
+        <div class="features">
+
+            <h1>Our Features</h1>
+
+            <div class="feature-container">
+
+                <div class="card">
+
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+                    <div class="card-content">
+
+                        <h2>Web Design</h2>
+
+                        <p>
+                            Modern responsive layouts using Flexbox and clean UI structure.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop">
+
+                    <div class="card-content">
+
+                        <h2>JavaScript</h2>
+
+                        <p>
+                            Interactive frontend logic using DOM manipulation and events.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop">
+
+                    <div class="card-content">
+
+                        <h2>Responsive UI</h2>
+
+                        <p>
+                            Mobile-friendly design with professional structure and styling.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LOGIN -->
+
+    <section id="login">
+
+        <div class="login-container">
+
+            <div class="login-box">
+
+                <h1>Login</h1>
+
+                <input type="email" placeholder="Enter Email" id="mail">
+
+                <input type="password" placeholder="Enter Password" id="pass">
+
+                <button onclick="login()">Login</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="about">
+
+            <h1>About Us</h1>
+
+            <p>
+                This project demonstrates complete frontend development fundamentals.
+                It includes navbar navigation, landing page design, image cards,
+                login validation, contact form, responsive layout and JavaScript-based
+                page switching inside a single HTML file.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="contact-container">
+
+            <div class="contact-box">
+
+                <h1>Contact Us</h1>
+
+                <input type="text" placeholder="Enter Name">
+
+                <input type="email" placeholder="Enter Email">
+
+                <textarea rows="5" placeholder="Enter Message"></textarea>
+
+                <button onclick="message()">Send Message</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>MJ Landing Page</h2>
+
+        <p>
+            HTML | CSS | JavaScript Project
+        </p>
+
+        <p>
+            © 2026 All Rights Reserved
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function showPage(pageId){
+
+            let sections = document.querySelectorAll("section");
+
+            sections.forEach(function(section){
+
+                section.classList.remove("active");
+
+            });
+
+            document.getElementById(pageId).classList.add("active");
+
+            window.scrollTo(0,0);
+
+        }
+
+        function login(){
+
+            let email = document.getElementById("mail").value;
+
+            let password = document.getElementById("pass").value;
+
+            if(email === "admin@gmail.com" && password === "1234"){
+
+                alert("Login Successful");
+
+                showPage('home');
+
+            }
+
+            else{
+
+                alert("Invalid Email or Password");
+
+            }
+
+        }
+
+        function message(){
+
+            alert("Message Sent Successfully");
+
+        }
+
+    </script>
+
+</body>
+</html>
+```
